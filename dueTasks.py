@@ -20,7 +20,7 @@ def debugprint(*stuffToPrint):
 
 		
 def main():
-	""" Main statement for running this as a command line tool """
+	""" Main statement for running this as a command line tool."""
 	from optparse import OptionParser;
 
 	importFilename = "test.taskpaper"
