@@ -8,6 +8,8 @@ from sys import stdout,stderr;
 from datetime import datetime;
 
 __name__ = "taskpyper"
+__version__ "0.1.0.4"
+
 gDebug = False;
 
 def debugprint(*stuffToPrint):
