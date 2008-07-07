@@ -1,25 +1,29 @@
 #!/usr/bin/env python
-import re;
-from optparse import OptionParser;
-from sys import stdout,stderr;
-from datetime import datetime;
 
+""" dueTasks  a tool for reading a taskpaper file and finding what tasks are
+due that day, and printing them to the screen."""
+
+import re;
+#from sys import stdout,stderr;
+from datetime import datetime;
 from taskpyper import TaskBlob
+
+
 
 gDebug = False;
 
+#:todo: hide this function from the outside world
 def debugprint(*stuffToPrint):
+	""" Global print funciton for debugging"""
 	#Astric indicates that it can handle a list as input
 	if (gDebug is True):
 		print "DEBUG:" + str(stuffToPrint)
 
 		
-def loadTaskpaperFromFile(filename):
-	tpBlob = TaskBlob(filename)
-	return tpBlob;
-
 def main():
 	""" Main statement for running this as a command line tool """
+	from optparse import OptionParser;
+
 	importFilename = "/Users/jmck/Documents/test.taskpaper"
 	tpBlob = None
 	checkForDue = True
@@ -39,7 +43,7 @@ def main():
 		debugprint('import filename')
 
 	if(importFilename):
-		tpBlob = loadTaskpaperFromFile(importFilename)
+		tpBlob =  TaskBlob(importFilename)
 
 	if tpBlob and (checkForDue is True):
 		dueItems = tpBlob.findDue()
