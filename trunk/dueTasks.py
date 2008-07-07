@@ -9,7 +9,7 @@ from datetime import datetime;
 from taskpyper import TaskBlob
 
 
-
+__version__ "0.1.0.0"
 gDebug = False;
 
 #:todo: hide this function from the outside world
