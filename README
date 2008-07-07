@@ -16,3 +16,6 @@ dueTasks.py
 	latest version :0.1
 	A command line utility for finding the most recent tasks, and displaying them to the screen
 	This is an example program as well as a functionality test
+	
+test.taskpaper
+	This is a test taskpaper for testing/development/etc
