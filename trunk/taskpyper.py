@@ -8,8 +8,7 @@ from sys import stdout,stderr;
 from datetime import datetime;
 
 __version__  = u"0.1.0.6"
-
-gDebug = False;
+gDebug = True;
 
 def debugprint(*stuffToPrint):
 	#Astric indicates that it can handle a list as input
@@ -47,22 +46,34 @@ class TaskBlob():
 			taskReg = re.compile(u"\s*- .*\n")
 			taskIter = taskReg.finditer(self.lastReadRawTxt)
 				
-	def autoBackup(self):
-		print 'starting backup'
-		print 'source filename: '
-		print self.sourceFilename
-		timeNow = datetime.now();
-		newFilenameArray = [self.sourceFilename,];
-		newFilenameArray.append(str(timeNow.year))
-		newFilenameArray.append(str(timeNow.month))
-		newFilenameArray.append(str(timeNow.day))
-		newFilenameArray.append(str(timeNow.hour))
-		newFilenameArray.append(str(timeNow.min))
-		newFilenameArray.append(str("BACKUP"))
-		backupFilename = ".".join(newFilenameArray)
-		print 'backup filename'
-		print str(backupFilename)
-		
+#	def autoBackup(self):
+#	print 'starting backup'
+#		print 'source filename: '
+#		print self.sourceFilename
+#		timeNow = datetime.now();
+#		newFilenameArray = [self.sourceFilename,];
+#		newFilenameArray.append(str(timeNow.year))
+#		newFilenameArray.append(str(timeNow.month))
+#		newFilenameArray.append(str(timeNow.day))
+#		newFilenameArray.append(str(timeNow.hour))
+#		newFilenameArray.append(str(timeNow.min))
+#		newFilenameArray.append(str("BACKUP"))
+#		backupFilename = ".".join(newFilenameArray)
+#		print 'backup filename'
+#		print str(backupFilename)
+
+	def findTaskByMatching(self,taskTextToFind):
+		"""Takes a string, tries to find all tasks that have that text in it, and
+		then returns an array of all tasks that matched the line"""
+		debugprint( 'find task by text: %s' % taskTextToFind)
+		matchedLines = []
+		matchReg = re.compile(re.escape(taskTextToFind), re.I)
+		for x in self.lastReadRawTxt.split('\n'):
+			if (matchReg.search(x) != None):
+				matchedLines.append(x)
+				
+		return matchedLines
+
 		
 
 	def findDue(self, targetDT):
