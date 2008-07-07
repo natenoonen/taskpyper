@@ -7,8 +7,7 @@ from optparse import OptionParser;
 from sys import stdout,stderr;
 from datetime import datetime;
 
-__name__ = "taskpyper"
-__version__ "0.1.0.4"
+__version__  = u"0.1"
 
 gDebug = False;
 

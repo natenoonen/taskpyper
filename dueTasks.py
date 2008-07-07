@@ -3,13 +3,12 @@
 """ dueTasks  a tool for reading a taskpaper file and finding what tasks are
 due that day, and printing them to the screen."""
 
-import re;
-#from sys import stdout,stderr;
-from datetime import datetime;
+import re
+from datetime import datetime
 from taskpyper import TaskBlob
 
 
-__version__ "0.1.0.0"
+_version_  = u"0.1"
 gDebug = False;
 
 #:todo: hide this function from the outside world
