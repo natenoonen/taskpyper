@@ -1,0 +1,15 @@
+- Stuff 
+- Things 1
+- Things 2
+	- more 3 @tag @date @done(2008-06-23)
+
+- stuff @automtic(date:weekly)
+- Run @today
+- Hack @due(2008-07-07)
+- Hack @due(2008.07.07)
+
+
+To learn in vi:
+- last instance of charachter on line cmd
+- faster search/replace
+- more stuff @automtic(date:weekly)

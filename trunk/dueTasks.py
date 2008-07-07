@@ -24,7 +24,7 @@ def main():
 	""" Main statement for running this as a command line tool """
 	from optparse import OptionParser;
 
-	importFilename = "/Users/jmck/Documents/test.taskpaper"
+	importFilename = "test.taskpaper"
 	tpBlob = None
 	checkForDue = True
 	exportDueType = "stdout"
