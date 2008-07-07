@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+""" taskpyper is a module of taskaper markup tools written in pthon."""
+
 import re;
 from optparse import OptionParser;
 from sys import stdout,stderr;
@@ -14,6 +16,10 @@ def debugprint(*stuffToPrint):
 		print "DEBUG:" + str(stuffToPrint)
 
 class TaskBlob():
+	""" TaskBlob is a class that contains a text file of tasks
+	and accessory functions.
+	TODO:
+	"""
 	lastReadRawTxt = None;
 	sourceFilename = None;
 
