@@ -8,7 +8,7 @@ from datetime import datetime
 from taskpyper import TaskBlob
 
 
-_version_  = u"0.1"
+__version__  = u"0.1.0.6"
 gDebug = False;
 
 #:todo: hide this function from the outside world
@@ -27,8 +27,10 @@ def main():
 	tpBlob = None
 	checkForDue = True
 	exportDueType = "stdout"
+	targetDatetime = datetime.now()
 	
 	debugprint('main')
+	
 	
 	#Parse for cmd line values
 	optParser = OptionParser()
@@ -45,7 +47,7 @@ def main():
 		tpBlob =  TaskBlob(importFilename)
 
 	if tpBlob and (checkForDue is True):
-		dueItems = tpBlob.findDue()
+		dueItems = tpBlob.findDue(targetDatetime)
 		if(exportDueType == "stdout"):
 			print "Due Items:"
 

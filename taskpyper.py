@@ -7,7 +7,7 @@ from optparse import OptionParser;
 from sys import stdout,stderr;
 from datetime import datetime;
 
-__version__  = u"0.1"
+__version__  = u"0.1.0.6"
 
 gDebug = False;
 
@@ -65,19 +65,28 @@ class TaskBlob():
 		
 		
 
-	def findDue(self):
+	def findDue(self, targetDT):
+		""" This function scans for items due that match the @date
+		with the ISO format date info matching the passed datetime (targetDT). 
+		If the targetDT is the same day as the current system information, @today, @tonight and 
+		other patterns are added to thet search"""
+		duePatterns = []		
+		#ISO pattern xxx.xx.xx or xxxx-xx-xx
+		todayDue = u"\s@due\(%(year)04d(-|.| )%(month)02d(-|.| )%(day)02d\)" %  \
+					{'year':targetDT.year, 'month':targetDT.month, 'day':targetDT.day}
+		duePatterns.append(todayDue)
+	
+		#if today is targetDT, add some extra patterns	
+		now = datetime.now()
+		if(targetDT.year == now.year and targetDT.month == now.month and targetDT.day == now.day):
+			duePatterns.extend([u"\s@today",u"\s@tonight"])
+
+		#:TODO: if tomorrow is targetDT, add some extra patterns	
+			
+		#:TODO: if yesterday was targetDT, add some extra patterns	
+
 		#print 'running findDue'
 		for x in self.lastReadRawTxt.split('\n'):
-			#look for the following keys:
-			#@due #@today #today @date(THIS_DAY)
-			#print 'x is %s' %x
-			duePatterns = [u"\s@today",u"\s@tonight"]
-			today = datetime.now();
-			todayDue = u"\s@due\(%(year)04d(-|.| )%(month)02d(-|.| )%(day)02d\)" %  \
-							{'year':today.year, 'month':today.month, 'day':today.day}
-			#debugprint(todayDue)
-			duePatterns.append(todayDue)
-			#ISO pattern xxx.xx.xx or xxxx-xx-xx
 			negatorPattern = u"\s@done"
 			negatorReg = re.compile(negatorPattern)
 			for pattern in duePatterns:
