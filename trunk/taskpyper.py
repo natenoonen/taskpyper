@@ -103,7 +103,7 @@ class TaskBlob():
 			for pattern in duePatterns:
 				#print '  doing pattern %s' % pattern
 				dueReg = re.compile(pattern);	
-				if(dueReg.search(x)): # and negatorReg.search(x) == None):
+				if(dueReg.search(x) and negatorReg.search(x) == None):
 					print 'due item found: %s' % x
 
 
