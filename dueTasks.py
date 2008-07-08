@@ -8,7 +8,7 @@ from datetime import datetime
 from taskpyper import TaskBlob
 
 
-__version__  = u"0.1.0.8"
+__version__  = u"0.1.0.9"
 gDebug = False;
 
 #:todo: hide this function from the outside world

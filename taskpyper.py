@@ -10,6 +10,11 @@ from datetime import datetime;
 __version__  = u"0.1.0.8"
 gDebug = False;
 
+en_isoweekdays = {1:"Monday",2:"Tuesday",3:"Wednesday",4:"Thursday",5:"Friday",6:"Satruday",
+					7:"Sunday"}
+
+isoWeekdaySets = {"EN":en_isoweekdays};
+
 def debugprint(*stuffToPrint):
 	#Astric indicates that it can handle a list as input
 	if (gDebug):
@@ -76,7 +81,7 @@ class TaskBlob():
 
 		
 
-	def findDue(self, targetDT,skipDoneTasks=True):
+	def findDue(self, targetDT,skipDoneTasks=True, lang="EN"):
 		""" This function scans for items due that match the @date
 		with the ISO format date info matching the passed datetime (targetDT). 
 		If the targetDT is the same day as the current system information, @today, @tonight and 
@@ -87,11 +92,19 @@ class TaskBlob():
 		todayDue = u"\s@due\(%(year)04d(-|.| )%(month)02d(-|.| )%(day)02d\)" %  \
 					{'year':targetDT.year, 'month':targetDT.month, 'day':targetDT.day}
 		duePatterns.append(todayDue)
-	
+			
 		#if today is targetDT, add some extra patterns	
 		now = datetime.now()
 		if(targetDT.year == now.year and targetDT.month == now.month and targetDT.day == now.day):
 			duePatterns.extend([u"\s@today",u"\s@tonight"])
+
+		#local language pattern if we ahve it
+		if(isoWeekdaySets.has_key(lang)):
+			weekdays = isoWeekdaySets[lang]
+			if weekdays.has_key(now.isoweekday()) :
+				str = u"\s@" + weekdays[now.isoweekday()];
+				print str
+				duePatterns.append(str)
 
 		#:TODO: if tomorrow is targetDT, add some extra patterns	
 			
@@ -105,7 +118,7 @@ class TaskBlob():
 			#TODO add ability to grab 'sub-issues'
 			for pattern in duePatterns:
 				#print '  doing pattern %s' % pattern
-				dueReg = re.compile(pattern);	
+				dueReg = re.compile(pattern, re.I);
 				if(dueReg.search(task)):
 					if((skipDoneTasks == False) or (negatorReg.search(task) == None) ):
 						dueItems.append(task);
