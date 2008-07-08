@@ -97,17 +97,20 @@ class TaskBlob():
 			
 		#:TODO: if yesterday was targetDT, add some extra patterns	
 
-		#print 'running findDue'
-		for x in self.lastReadRawTxt.split('\n'):
+
+		#serch for the matches
+		for task in self.lastReadRawTxt.split('\n'):
 			negatorPattern = u"\s@done"
 			negatorReg = re.compile(negatorPattern)
+			#TODO add ability to grab 'sub-issues'
 			for pattern in duePatterns:
 				#print '  doing pattern %s' % pattern
 				dueReg = re.compile(pattern);	
-				if(dueReg.search(x)):
-					if((skipDoneTasks == False) or (negatorReg.search(x) == None) ):
-						dueItems.append(x);
-						debugprint('due item found: %s' % x)
+				if(dueReg.search(task)):
+					if((skipDoneTasks == False) or (negatorReg.search(task) == None) ):
+						dueItems.append(task);
+						#prevIssueIndentLvl = X;
+						debugprint('due item found: %s' % task)
 		return dueItems;
 
 	def findPastDue(self):
