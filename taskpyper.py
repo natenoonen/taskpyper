@@ -7,8 +7,8 @@ from optparse import OptionParser;
 from sys import stdout,stderr;
 from datetime import datetime;
 
-__version__  = u"0.1.0.6"
-gDebug = True;
+__version__  = u"0.1.0.8"
+gDebug = False;
 
 def debugprint(*stuffToPrint):
 	#Astric indicates that it can handle a list as input
@@ -76,12 +76,13 @@ class TaskBlob():
 
 		
 
-	def findDue(self, targetDT):
+	def findDue(self, targetDT,skipDoneTasks=True):
 		""" This function scans for items due that match the @date
 		with the ISO format date info matching the passed datetime (targetDT). 
 		If the targetDT is the same day as the current system information, @today, @tonight and 
-		other patterns are added to thet search"""
+		other patterns are added to thet search."""
 		duePatterns = []		
+		dueItems = []
 		#ISO pattern xxx.xx.xx or xxxx-xx-xx
 		todayDue = u"\s@due\(%(year)04d(-|.| )%(month)02d(-|.| )%(day)02d\)" %  \
 					{'year':targetDT.year, 'month':targetDT.month, 'day':targetDT.day}
@@ -103,30 +104,11 @@ class TaskBlob():
 			for pattern in duePatterns:
 				#print '  doing pattern %s' % pattern
 				dueReg = re.compile(pattern);	
-				if(dueReg.search(x) and negatorReg.search(x) == None):
-					print 'due item found: %s' % x
-
-
-	def updateAutomatics(self):
-		print "Testing UpdateAutomatics"
-		x = self.findAutomatics()
-
-	def findAutomatics(self):
-		"""returns a list of automated items from the raw text"""
-		matchAutomatedTag = []
-		for x in self.lastReadRawTxt.split('n'):
-			print 'bar'
-			autoReg = re.compile(ur"@auto",re.I);
-			z = autoReg.search(x)
-			print z
-			if(z):
-				print 'baz'
-				print 'automated item found %s' % x
-				for c in range(0,len(z.groups())) :
-				
-					print "Groups %d: %s " % c, z.groups(c) 
-				matchAutomatedTag.append(x)
-		return matchAutomatedTag
+				if(dueReg.search(x)):
+					if((skipDoneTasks == False) or (negatorReg.search(x) == None) ):
+						dueItems.append(x);
+						debugprint('due item found: %s' % x)
+		return dueItems;
 
 	def findPastDue(self):
 		#import datetime;
@@ -136,4 +118,27 @@ class TaskBlob():
 			pastDueReg = re.compile(u"\s@due\([0-9]{4}-[0-9]{2}-[0-9]{2}\)");
 			if(pastDueReg.search(x)):
 				dueWithDate.append(x)
-				#print 'due found %s' % x	
+				#print 'due found %s' % x
+
+#	def updateAutomatics(self):
+#		print "Testing UpdateAutomatics"
+#		x = self.findAutomatics()
+
+#	def findAutomatics(self):
+#		"""returns a list of automated items from the raw text"""
+#		matchAutomatedTag = []
+#		for x in self.lastReadRawTxt.split('n'):
+#			print 'bar'
+#			autoReg = re.compile(ur"@auto",re.I);
+#			z = autoReg.search(x)
+#			print z
+#			if(z):
+#				print 'baz'
+#				print 'automated item found %s' % x
+#				for c in range(0,len(z.groups())) :
+				
+#					print "Groups %d: %s " % c, z.groups(c) 
+#				matchAutomatedTag.append(x)
+#		return matchAutomatedTag
+
+

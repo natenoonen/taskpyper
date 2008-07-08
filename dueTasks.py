@@ -8,7 +8,7 @@ from datetime import datetime
 from taskpyper import TaskBlob
 
 
-__version__  = u"0.1.0.6"
+__version__  = u"0.1.0.8"
 gDebug = False;
 
 #:todo: hide this function from the outside world
@@ -47,9 +47,11 @@ def main():
 		tpBlob =  TaskBlob(importFilename)
 
 	if tpBlob and (checkForDue is True):
-		dueItems = tpBlob.findDue(targetDatetime)
+		dueTasks = tpBlob.findDue(targetDatetime)
 		if(exportDueType == "stdout"):
 			print "Due Items:"
+			for task in dueTasks:
+				print str(task)
 
 if __name__ == u"__main__":
 	main()
