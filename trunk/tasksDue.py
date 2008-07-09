@@ -13,10 +13,10 @@ gDebug = False;
 
 #:todo: hide this function from the outside world
 def debugprint(*stuffToPrint):
-	""" Global print funciton for debugging"""
 	#Astric indicates that it can handle a list as input
-	if (gDebug is True):
-		print "DEBUG:" + str(stuffToPrint)
+	if (gDebug):
+		print "DEBUG:" + " ".join(stuffToPrint)
+
 
 		
 def main():

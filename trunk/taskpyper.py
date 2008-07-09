@@ -7,18 +7,21 @@ from optparse import OptionParser;
 from sys import stdout,stderr;
 from datetime import datetime;
 
-__version__  = u"0.1.0.8"
-gDebug = False;
+__version__  = u"0.1.0.10"
+gDebug = True;
 
-en_isoweekdays = {1:"Monday",2:"Tuesday",3:"Wednesday",4:"Thursday",5:"Friday",6:"Satruday",
-					7:"Sunday"}
 
-isoWeekdaySets = {"EN":en_isoweekdays};
+en_isoOffsetNames = {-1:"yesterday",0:"today",1:"tomorrow"}
+#this week, next week, etc is harder
 
+
+
+#:todo: hide this function from the outside world
 def debugprint(*stuffToPrint):
 	#Astric indicates that it can handle a list as input
 	if (gDebug):
-		print "DEBUG:" + str(stuffToPrint)
+		print "DEBUG:" + " ".join(stuffToPrint)
+
 
 class TaskBlob():
 	""" TaskBlob is a class that contains a text file of tasks
@@ -99,12 +102,16 @@ class TaskBlob():
 			duePatterns.extend([u"\s@today",u"\s@tonight"])
 
 		#local language pattern if we ahve it
-		if(isoWeekdaySets.has_key(lang)):
-			weekdays = isoWeekdaySets[lang]
-			if weekdays.has_key(now.isoweekday()) :
-				str = u"\s@" + weekdays[now.isoweekday()];
-				debugprint(str)
-				duePatterns.append(str)
+		duePatterns.append(u"\s@" +now.strftime("%A")+u"\S") #full day name
+		duePatterns.append(u"\s@" +now.strftime("%a")+u"\S") #abbr day name
+		
+		#if(isoWeekdaySets.has_key(lang)):
+		#	weekdays = isoWeekdaySets[lang]
+		#	if weekdays.has_key(now.isoweekday()) :
+		#		str = u"\s@" + weekdays[now.isoweekday()];
+		#		debugprint(str)
+		#		duePatterns.append(str)
+		#		*/
 
 		#:TODO: if tomorrow is targetDT, add some extra patterns	
 			
@@ -136,6 +143,14 @@ class TaskBlob():
 				dueWithDate.append(x)
 				#print 'due found %s' % x
 
+	def setIsoDates( baseDateTime = datetime.now()):
+		"""This funciton scans the file for  all dates with @somedayname and 
+		converts them to @event(IsoDate) or @due (IsoDate)
+		"""
+		
+		debugprint("Boo")
+		
+	
 #	def updateAutomatics(self):
 #		print "Testing UpdateAutomatics"
 #		x = self.findAutomatics()

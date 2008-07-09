@@ -13,10 +13,12 @@ from taskpyper import TaskBlob
 gDebug = True;
 __version__  = u"0.1.0.6"
 
+#:todo: hide this function from the outside world
 def debugprint(*stuffToPrint):
 	#Astric indicates that it can handle a list as input
 	if (gDebug):
-		print "DEBUG:" + str(stuffToPrint)
+		print "DEBUG:" + " ".join(stuffToPrint)
+
 
 
 def main():
