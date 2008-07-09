@@ -86,7 +86,7 @@ class TaskBlob():
 		with the ISO format date info matching the passed datetime (targetDT). 
 		If the targetDT is the same day as the current system information, @today, @tonight and 
 		other patterns are added to thet search."""
-		duePatterns = []		
+		duePatterns = ["\s@due\s","\s@todo"]		
 		dueItems = []
 		#ISO pattern xxx.xx.xx or xxxx-xx-xx
 		todayDue = u"\s@due\(%(year)04d(-|.| )%(month)02d(-|.| )%(day)02d\)" %  \
@@ -103,7 +103,7 @@ class TaskBlob():
 			weekdays = isoWeekdaySets[lang]
 			if weekdays.has_key(now.isoweekday()) :
 				str = u"\s@" + weekdays[now.isoweekday()];
-				print str
+				debugprint(str)
 				duePatterns.append(str)
 
 		#:TODO: if tomorrow is targetDT, add some extra patterns	
