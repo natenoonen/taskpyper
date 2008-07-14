@@ -4,8 +4,8 @@
 
 import re;
 from optparse import OptionParser;
-from sys import stdout,stderr;
-from datetime import datetime;
+from sys import stdout,stderr
+from datetime import datetime
 
 __version__  = u"0.1.0.10"
 gDebug = True;
@@ -171,5 +171,4 @@ class TaskBlob():
 #					print "Groups %d: %s " % c, z.groups(c) 
 #				matchAutomatedTag.append(x)
 #		return matchAutomatedTag
-
 
