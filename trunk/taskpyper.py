@@ -1,23 +1,28 @@
 #!/usr/bin/env python
-
-""" taskpyper is a module of taskaper markup tools written in pthon."""
+"""
+Taskpyper is a module of taskaper markup tools written in pthon.
+TODO: Document what markup is acceptable here."""
 
 import re;
 from optparse import OptionParser;
 from sys import stdout,stderr
 from datetime import datetime
 
-__version__  = u"0.1.0.12"
-gDebug = True;
+#TODO: Insert licesnse code here
+__lic__ = u"LGPL"
+__version__  = u"0.1.0.13";
+__author__ = u"FarMcKon";
 
+#Global values 
+_gDebug = True;
 
 en_isoOffsetNames = {-1:"yesterday",0:"today",1:"tomorrow"}
-#this week, next week, etc is harder
+	#this week, next week, etc is harder
 
 
 
-#:todo: hide this function from the outside world
 def debugprint(*stuffToPrint):
+""" Debugging tool """
 	#Astric indicates that it can handle a list as input
 	if (gDebug):
 		print "DEBUG:" + " ".join(stuffToPrint)
@@ -25,11 +30,11 @@ def debugprint(*stuffToPrint):
 
 class TaskBlob():
 	""" TaskBlob is a class that contains a text file of tasks
-	and accessory functions.
-	TODO:
+	and accessory functions. TODO:
 	"""
 	tasksRawText = None;
 	sourceFilename = None;
+	tasksSyncedToFile = None;
 
 	def __init__(self,filename=None):
 		self.load(filename)
@@ -41,8 +46,9 @@ class TaskBlob():
 			fh = open(filename,'r')
 			if(fh):
 				self.tasksRawText = fh.read()	
-				fh.close()
 				self.sourceFilename = filename
+				self.tasksSyncedToFile = True;
+				fh.close()
 				print 'load file OK'	
 		else: #if filename is None
 			print 'No file to load'
@@ -71,11 +77,19 @@ class TaskBlob():
 
 	def removeExactMatch(self,exactTaskText):
 		if exactTaskText:
-			if exactTaskText[-1] != '\n':
-				exactTaskText = exactTaskText + '\n'
-			reg = re.compile(exactTaskText);
-			reg.search(tasksRawText);
-			print "Function not FINISHED"
+			#if exactTaskText[-1] != '\n':
+			#	exactTaskText = exactTaskText
+			regger = re.compile(re.escape(exactTaskText));
+			#print 'exact task text: '+ exactTaskText
+			#print regger
+			match = regger.search(self.tasksRawText,re.M);
+			#print 'match: ' + str(match)
+			if (match):
+				print 'match found'
+				re.sub('',self.tasksRawText)
+				self.tasksSyncedToFile = False;
+			else:
+				print 'no match found'
 			
 		else:
 			print "no text FAIL!"
@@ -127,9 +141,9 @@ class TaskBlob():
 		#		duePatterns.append(str)
 		#		*/
 
-		#:TODO: if tomorrow is targetDT, add some extra patterns	
+		#:TODO: if tomorrow is targetDT, add some extra patterns
 			
-		#:TODO: if yesterday was targetDT, add some extra patterns	
+		#:TODO: if yesterday was targetDT, add some extra patterns
 
 
 		#serch for the matches
