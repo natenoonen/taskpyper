@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import unittest;
 import taskpyper;
 
@@ -18,12 +20,11 @@ def debugprint(*stuffToPrint):
 		
 class TaskBlogTest(unittest.TestCase):
 
-	blob = None
-#	def __init__():
-#		debugprint("Initalizing UnitTests");
+	def __init__():
+		debugprint("Initalizing UnitTests");
 	
 	def setUp(self):
-		blog = new TaskFile("UnitTester.taskpaper")
+		blob = TaskFile("UnitTester.taskpaper");
 		debugprint("setup UnitTests");
 		
 	def tearDown(self):
@@ -31,8 +32,10 @@ class TaskBlogTest(unittest.TestCase):
 
 
 	def testLoad(self):
-		blog = new TaskFile("UnitTester.taskpaper")
-		self.assert
+		blog = TaskFile("UnitTester.taskpaper")
+		self.assert_(blog.tasksRawText)
+		self.assert_(blog.sourceFilename)
+		self.assert_(blog.fileSynced)
 		debugprint("setup UnitTests");
 
 	def testEmpty(self):
