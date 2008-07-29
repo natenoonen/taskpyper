@@ -19,7 +19,7 @@ class TaskBlogTest(unittest.TestCase):
 #		debugprint("Initalizing UnitTests");
 	
 	def setUp(self):
-		blog = new TaskBlob("UnitTester.taskpaper")
+		blog = new TaskFile("UnitTester.taskpaper")
 		debugprint("setup UnitTests");
 		
 	def tearDown(self):
@@ -27,7 +27,7 @@ class TaskBlogTest(unittest.TestCase):
 
 
 	def testLoad(self):
-		blog = new TaskBlob("UnitTester.taskpaper")
+		blog = new TaskFile("UnitTester.taskpaper")
 		self.assert
 		debugprint("setup UnitTests");
 

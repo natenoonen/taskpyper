@@ -5,7 +5,7 @@ due that day, and printing them to the screen."""
 
 import re
 from datetime import datetime
-from taskpyper import TaskBlob
+from taskpyper import TaskFile
 
 
 __version__  = u"0.1.0.9"
@@ -44,7 +44,7 @@ def main():
 		debugprint('import filename')
 
 	if(importFilename):
-		tpBlob =  TaskBlob(importFilename)
+		tpBlob =  TaskFile(importFilename)
 
 	if tpBlob and (checkForDue is True):
 		dueTasks = tpBlob.findDue(targetDatetime)

@@ -7,7 +7,7 @@ from optparse import OptionParser
 from sys import stdout,stderr
 from datetime import datetime
 
-from taskpyper import TaskBlob
+from taskpyper import TaskFile
 
 
 gDebug = True;
@@ -42,7 +42,7 @@ def main():
 		debugprint('import filename')
 
 	if(importFilename):
-		tpBlob =  TaskBlob(importFilename)
+		tpBlob =  TaskFile(importFilename)
 
 	if tpBlob and (setIsoDates):
 		

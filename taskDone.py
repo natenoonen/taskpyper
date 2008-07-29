@@ -7,7 +7,7 @@ from optparse import OptionParser
 from sys import stdout,stderr
 from datetime import datetime
 
-from taskpyper import TaskBlob
+from taskpyper import TaskFile
 
 
 gDebug = True;
@@ -47,7 +47,7 @@ def main():
 
 	#do something based on the settings
 	if(importFilename):
-		tpBlob =  TaskBlob(importFilename)
+		tpBlob =  TaskFile(importFilename)
 
 	if tpBlob and (taskTextToFind is not None):
 		debugprint('trying to match')
