@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest;
-import taskpyper;
+from taskpyper import *;
 
 
 #These are semi-standard magic values to track module info
@@ -9,7 +9,7 @@ __license__ = u"LGPL"
 __version__  = u"0.1.0.16";
 __author__ = u"FarMcKon";
 
-_gDebug = True;
+_gDebug = False;
 
 #:todo: hide this function from the outside world
 def debugprint(*stuffToPrint):
@@ -20,11 +20,8 @@ def debugprint(*stuffToPrint):
 		
 class TaskBlogTest(unittest.TestCase):
 
-	def __init__():
-		debugprint("Initalizing UnitTests");
-	
 	def setUp(self):
-		blob = TaskFile("UnitTester.taskpaper");
+		#blob = TaskFile("UnitTester.taskpaper");
 		debugprint("setup UnitTests");
 		
 	def tearDown(self):
@@ -36,7 +33,6 @@ class TaskBlogTest(unittest.TestCase):
 		self.assert_(blog.tasksRawText)
 		self.assert_(blog.sourceFilename)
 		self.assert_(blog.fileSynced)
-		debugprint("setup UnitTests");
 
 	def testEmpty(self):
 		debugprint("testEmpty");
