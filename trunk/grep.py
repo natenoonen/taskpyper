@@ -26,7 +26,14 @@ class grep():
 		
 		if (matches is not None):
 			print matches
+	
+
 		
+def clear(size=50):
+	"""quick function hack to clear the screen"""
+	for i in range(0,size): print "";
+
+	
 def main():
 	print 'main'
 	
