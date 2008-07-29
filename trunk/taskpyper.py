@@ -11,7 +11,7 @@ from datetime import datetime
 #These are semi-standard magic values to track
 #module info
 __license__ = u"LGPL"
-__version__  = u"0.1.0.13";
+__version__  = u"0.1.0.16";
 __author__ = u"FarMcKon";
 
 #Global values 
@@ -19,9 +19,9 @@ _gDebug = True;
 
 
 def debugprint(*stuffToPrint):
-""" Debugging tool """
+	""" Debugging tool """
 	#Astric indicates that it can handle a list as input
-	if (gDebug):
+	if (_gDebug):
 		print "DEBUG:" + " ".join(stuffToPrint)
 
 
@@ -35,12 +35,12 @@ class TaskFile():
 
 
 	def __init__(self,filename=None):
-	""" Create the TaskFile object from a file""""
+		""" Create the TaskFile object from a file"""
 		self.load(filename)
 		
 
 	def load(self,filename):
-	""" Load a text file of tasks into this TaskFile object """
+		""" Load a text file of tasks into this TaskFile object """
 		debugprint( 'creating task blob from %s' %filename)
 		
 		if filename is not None:
@@ -158,6 +158,9 @@ class TaskFile():
 						dueItems.append(task);
 						#prevIssueIndentLvl = X;
 						debugprint('due item found: %s' % task)
+						
+		#TODO: strip duplicats from dueItems
+		
 		return dueItems;
 
 	def findPastDue(self):
