@@ -21,7 +21,6 @@ def debugprint(*stuffToPrint):
 class TaskBlogTest(unittest.TestCase):
 
 	def setUp(self):
-		#blob = TaskFile("UnitTester.taskpaper");
 		debugprint("setup UnitTests");
 		
 	def tearDown(self):

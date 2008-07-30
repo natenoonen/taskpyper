@@ -7,7 +7,6 @@ import re
 from datetime import datetime
 from taskpyper import TaskFile
 
-
 __version__  = u"0.1.0.9"
 gDebug = False;
 

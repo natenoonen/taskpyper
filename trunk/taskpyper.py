@@ -8,8 +8,7 @@ from optparse import OptionParser;
 from sys import stdout,stderr
 from datetime import datetime
 
-#These are semi-standard magic values to track
-#module info
+#These are semi-standard magic values to track module info
 __license__ = u"LGPL"
 __version__  = u"0.1.0.16";
 __author__ = u"FarMcKon";
