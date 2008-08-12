@@ -5,6 +5,7 @@
 
 - stuff @automtic(date:weekly)
 - Run @today
+- other thing @due(2008-08-12)
 - Hack @due(2008-07-07)
 - Hack @due(2008.07.07)
 - Test @wednesday
