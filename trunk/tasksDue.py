@@ -9,8 +9,9 @@ from sys import stderr,stdout
 from datetime import datetime
 from taskpyper import TaskFile
 
+__version__  = u"0.1.0.10"
+# 0.1.0.10 - 
 
-__version__  = u"0.1.0.9"
 gDebug = True;
 
 #:todo: hide this function from the outside world
